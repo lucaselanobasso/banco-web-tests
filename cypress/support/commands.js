@@ -7,7 +7,7 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
+//  
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
@@ -23,3 +23,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+//Comandos customizados para interagir com a aplicação
+import './commands/common'
+
+//Comandos customizados para interagir com funcionalidades específicas
+import './commands/login'
+import './commands/transferencia'
+
