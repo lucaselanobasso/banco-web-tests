@@ -1,0 +1,54 @@
+name: Cypress Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout test repository
+        uses: actions/checkout@v4
+
+      - name: Checkout banco-api
+        uses: actions/checkout@v4
+        with:
+          repository: juliodelimas/banco-api
+          path: banco-api
+
+      - name: Checkout banco-web
+        uses: actions/checkout@v4
+        with:
+          repository: juliodelimas/banco-web
+          path: banco-web
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install API dependencies
+        working-directory: ./banco-api
+        run: npm install
+
+      - name: Install Web dependencies  
+        working-directory: ./banco-web
+        run: npm install
+
+      - name: Install test dependencies
+        run: npm install
+
+      - name: Start API
+        working-directory: ./banco-api
+        run: npm run rest-api
+        
+      - name: Start Web App
+        working-directory: ./banco-web
+        run: npm run server
+        
+      - name: Wait for apps to start
+        run: |
+          sleep 30
+          
+      - name: Run Cypress tests
+        run: npm test
