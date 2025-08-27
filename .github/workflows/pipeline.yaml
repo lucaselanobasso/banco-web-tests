@@ -6,6 +6,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
+    env:
+      API_PORT: ${{ secrets.API_PORT }}
+      APP_PORT: ${{ secrets.APP_PORT }}
+      API_URL: ${{ secrets.API_URL }}
+      APP_URL: ${{ secrets.APP_URL }}
+      
     steps:
       - name: Checkout test repository
         uses: actions/checkout@v4
